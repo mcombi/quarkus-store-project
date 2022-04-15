@@ -24,7 +24,7 @@ public class OrderConsumer {
             oe=new OrderEntity();
             oe.description=record.value().description;
             oe.quantity=record.value().quantity;
- oe.persist();
+            oe.persist();
             logger.infof("message persisted");
         }
     }
