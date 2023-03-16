@@ -14,7 +14,7 @@ public class OrderConsumer {
 
     private final Logger logger = Logger.getLogger(OrderConsumer.class);
 
-    @Incoming("orders-out")
+    @Incoming("orders")
     @Transactional
     public void receive(Record<UUID, Order> record) {
         logger.infof("message received");
