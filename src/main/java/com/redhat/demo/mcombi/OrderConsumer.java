@@ -17,7 +17,7 @@ public class OrderConsumer {
     @Incoming("orders")
     @Transactional
     public void receive(Record<UUID, Order> record) {
-        logger.infof("message received");
+        logger.infof("message received now");
 
         OrderEntity oe = OrderEntity.findByDescription(record.value().description);
         if (oe==null){
