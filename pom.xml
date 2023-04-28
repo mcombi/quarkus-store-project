@@ -35,6 +35,10 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jdbc-postgresql</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
     </dependency>
     <dependency>
@@ -50,10 +54,7 @@
       <artifactId>quarkus-junit5</artifactId>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-jdbc-postgresql</artifactId>
-    </dependency>
+
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy</artifactId>
@@ -109,62 +110,62 @@
           </systemPropertyVariables>
         </configuration>
       </plugin>
-      <plugin>
-        <!-- Automatically start PostgreSQL for integration testing - requires Docker -->
-        <groupId>io.fabric8</groupId>
-        <artifactId>docker-maven-plugin</artifactId>
-        <version>0.39.1</version>
-        <configuration>
-          <skip>false</skip>
-          <images>
-            <image>
-              <name>postgres:10.5</name>
-              <alias>postgresql</alias>
-              <run>
-                <env>
-                  <POSTGRES_USER>ordersuser</POSTGRES_USER>
-                  <POSTGRES_PASSWORD>orderspassword</POSTGRES_PASSWORD>
-                  <POSTGRES_DB>ordersdb</POSTGRES_DB>
-                </env>
-                <ports>
-                  <port>5432:5432</port>
-                </ports>
-                <log>
-                  <prefix>PostgreSQL: </prefix>
-                  <date>default</date>
-                  <color>cyan</color>
-                </log>
-                <wait>
-                  <tcp>
-                    <mode>mapped</mode>
-                    <ports>
-                      <port>5432</port>
-                    </ports>
-                  </tcp>
-                  <time>10000</time>
-                </wait>
-              </run>
-            </image>
-          </images>
-        </configuration>
-        <executions>
-          <execution>
-            <id>docker-start</id>
-            <phase>test-compile</phase>
-            <goals>
-              <goal>stop</goal>
-              <goal>start</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>docker-stop</id>
-            <phase>post-integration-test</phase>
-            <goals>
-              <goal>stop</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+<!--      <plugin>-->
+<!--        &lt;!&ndash; Automatically start PostgreSQL for integration testing - requires Docker &ndash;&gt;-->
+<!--        <groupId>io.fabric8</groupId>-->
+<!--        <artifactId>docker-maven-plugin</artifactId>-->
+<!--        <version>0.39.1</version>-->
+<!--        <configuration>-->
+<!--          <skip>false</skip>-->
+<!--          <images>-->
+<!--            <image>-->
+<!--              <name>postgres:10.5</name>-->
+<!--              <alias>postgresql</alias>-->
+<!--              <run>-->
+<!--                <env>-->
+<!--                  <POSTGRES_USER>ordersuser</POSTGRES_USER>-->
+<!--                  <POSTGRES_PASSWORD>orderspassword</POSTGRES_PASSWORD>-->
+<!--                  <POSTGRES_DB>ordersdb</POSTGRES_DB>-->
+<!--                </env>-->
+<!--                <ports>-->
+<!--                  <port>5432:5432</port>-->
+<!--                </ports>-->
+<!--                <log>-->
+<!--                  <prefix>PostgreSQL: </prefix>-->
+<!--                  <date>default</date>-->
+<!--                  <color>cyan</color>-->
+<!--                </log>-->
+<!--                <wait>-->
+<!--                  <tcp>-->
+<!--                    <mode>mapped</mode>-->
+<!--                    <ports>-->
+<!--                      <port>5432</port>-->
+<!--                    </ports>-->
+<!--                  </tcp>-->
+<!--                  <time>10000</time>-->
+<!--                </wait>-->
+<!--              </run>-->
+<!--            </image>-->
+<!--          </images>-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <id>docker-start</id>-->
+<!--            <phase>test-compile</phase>-->
+<!--            <goals>-->
+<!--              <goal>stop</goal>-->
+<!--              <goal>start</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--          <execution>-->
+<!--            <id>docker-stop</id>-->
+<!--            <phase>post-integration-test</phase>-->
+<!--            <goals>-->
+<!--              <goal>stop</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
     </plugins>
   </build>
   <profiles>

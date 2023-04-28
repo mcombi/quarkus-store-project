@@ -16,4 +16,9 @@ public class OrderResource {
     public List<OrderEntity> getAllOrders(){
         return OrderEntity.findAllOrderEntity();
     }
+
+    @DELETE
+    public void deleteOrder(@PathParam("id") int id){
+        OrderEntity.deleteById(id);
+    }
 }
