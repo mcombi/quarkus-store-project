@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 public class OrderEntity extends PanacheEntity {
-//    public int id;
+    public Long id;
     public int quantity;
     public String description;
 

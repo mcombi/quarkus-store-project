@@ -22,6 +22,7 @@ public class OrderConsumer {
         OrderEntity oe = OrderEntity.findById(record.value().id);
         if (oe==null){
             oe=new OrderEntity();
+            oe.id=record.value().id;
             oe.description=record.value().description;
             oe.quantity=record.value().quantity;
             oe.persist();
