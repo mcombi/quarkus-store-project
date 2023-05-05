@@ -19,7 +19,7 @@ public class OrderConsumer {
     public void receive(Record<UUID, Order> record) {
         logger.infof("message received now");
 
-        OrderEntity oe = OrderEntity.findByDescription(record.value().description);
+        OrderEntity oe = OrderEntity.findById(record.value().id);
         if (oe==null){
             oe=new OrderEntity();
             oe.description=record.value().description;
