@@ -3,11 +3,12 @@ package com.redhat.demo.mcombi.model;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.List;
 
 @Entity
 public class OrderEntity extends PanacheEntity {
-    public Long id;
+
     public int quantity;
     public String description;
 
