@@ -25,6 +25,7 @@ public class OrderConsumer {
    //         oe.id=record.value().id;
             oe.description=record.value().description;
             oe.quantity=record.value().quantity;
+            oe.itemCategory=record.value().itemCategory;
             oe.persist();
             logger.infof("message persisted successfully");
         }

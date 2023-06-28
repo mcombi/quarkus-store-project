@@ -12,6 +12,8 @@ public class OrderEntity extends PanacheEntity {
     public int quantity;
     public String description;
 
+    public String itemCategory;
+
     public static OrderEntity findByDescription(String description){
         return  find("description",description).firstResult();
     }
