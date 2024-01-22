@@ -29,5 +29,7 @@ public class OrderConsumer {
             oe.persist();
             logger.infof("message persisted successfully");
         }
+
+
     }
 }
