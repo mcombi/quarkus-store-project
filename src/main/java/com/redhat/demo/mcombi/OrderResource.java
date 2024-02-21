@@ -65,16 +65,18 @@ public class OrderResource {
 
     }
 
-    @DELETE
+ //   @DELETE
   /*  @Operation(summary = "Save an order")
     @APIResponse(
             responseCode = "200",
             description = "Gets all fights, or empty list if none",
             content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = Order.class, type = SchemaType.DEFAULT))
     )*/
+/*
     @Transactional
     public void deleteOrders(){
         OrderEntity.deleteAll();
     }
+*/
 
 }
