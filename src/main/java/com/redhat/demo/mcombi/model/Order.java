@@ -2,7 +2,9 @@ package com.redhat.demo.mcombi.model;
 
 public class Order {
     public String description;
-    public int id;
+    public Long id;
     public int quantity;
+
+    public String itemCategory;
 
 }

@@ -13,7 +13,10 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-    <quarkus.platform.version>2.13.0.Final</quarkus.platform.version>
+
+    <quarkus.platform.version>2.16.5.Final</quarkus.platform.version>
+
+
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
   </properties>
   <dependencyManagement>
@@ -28,10 +31,13 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
-    <!-- Hibernate ORM specific dependencies -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-hibernate-orm-panache</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jdbc-postgresql</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -47,12 +53,16 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-junit5</artifactId>
-      <scope>test</scope>
+      <artifactId>quarkus-smallrye-health</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-jdbc-postgresql</artifactId>
+      <artifactId>quarkus-opentelemetry</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-junit5</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -62,15 +72,24 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy-jsonb</artifactId>
     </dependency>
-      <dependency>
+    <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
     </dependency>
-       <dependency>
+    <dependency>
       <groupId>io.smallrye.reactive</groupId>
       <artifactId>smallrye-reactive-messaging-in-memory</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-micrometer-registry-prometheus</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
   </dependencies>
   <build>
@@ -84,87 +103,31 @@
           <execution>
             <goals>
               <goal>build</goal>
-              <goal>generate-code</goal>
-              <goal>generate-code-tests</goal>
+<!--              <goal>generate-code</goal>-->
+<!--              <goal>generate-code-tests</goal>-->
             </goals>
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>${compiler-plugin.version}</version>
-        <configuration>
-          <compilerArgs>
-            <arg>-parameters</arg>
-          </compilerArgs>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${surefire-plugin.version}</version>
-        <configuration>
-          <systemPropertyVariables>
-            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-            <maven.home>${maven.home}</maven.home>
-          </systemPropertyVariables>
-        </configuration>
-      </plugin>
-      <plugin>
-        <!-- Automatically start PostgreSQL for integration testing - requires Docker -->
-        <groupId>io.fabric8</groupId>
-        <artifactId>docker-maven-plugin</artifactId>
-        <version>0.39.1</version>
-        <configuration>
-          <skip>false</skip>
-          <images>
-            <image>
-              <name>postgres:10.5</name>
-              <alias>postgresql</alias>
-              <run>
-                <env>
-                  <POSTGRES_USER>ordersuser</POSTGRES_USER>
-                  <POSTGRES_PASSWORD>orderspassword</POSTGRES_PASSWORD>
-                  <POSTGRES_DB>ordersdb</POSTGRES_DB>
-                </env>
-                <ports>
-                  <port>5432:5432</port>
-                </ports>
-                <log>
-                  <prefix>PostgreSQL: </prefix>
-                  <date>default</date>
-                  <color>cyan</color>
-                </log>
-                <wait>
-                  <tcp>
-                    <mode>mapped</mode>
-                    <ports>
-                      <port>5432</port>
-                    </ports>
-                  </tcp>
-                  <time>10000</time>
-                </wait>
-              </run>
-            </image>
-          </images>
-        </configuration>
-        <executions>
-          <execution>
-            <id>docker-start</id>
-            <phase>test-compile</phase>
-            <goals>
-              <goal>stop</goal>
-              <goal>start</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>docker-stop</id>
-            <phase>post-integration-test</phase>
-            <goals>
-              <goal>stop</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+<!--      <plugin>-->
+<!--        <artifactId>maven-compiler-plugin</artifactId>-->
+<!--        <version>${compiler-plugin.version}</version>-->
+<!--        <configuration>-->
+<!--          <compilerArgs>-->
+<!--            <arg>-parameters</arg>-->
+<!--          </compilerArgs>-->
+<!--        </configuration>-->
+<!--      </plugin>-->
+<!--      <plugin>-->
+<!--        <artifactId>maven-surefire-plugin</artifactId>-->
+<!--        <version>${surefire-plugin.version}</version>-->
+<!--        <configuration>-->
+<!--          <systemPropertyVariables>-->
+<!--            <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>-->
+<!--            <maven.home>${maven.home}</maven.home>-->
+<!--          </systemPropertyVariables>-->
+<!--        </configuration>-->
+<!--      </plugin>-->
     </plugins>
   </build>
   <profiles>
@@ -175,29 +138,29 @@
           <name>native</name>
         </property>
       </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <version>${surefire-plugin.version}</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>integration-test</goal>
-                  <goal>verify</goal>
-                </goals>
-                <configuration>
-                  <systemPropertyVariables>
-                    <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
-                    <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-                    <maven.home>${maven.home}</maven.home>
-                  </systemPropertyVariables>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
+<!--      <build>-->
+<!--        <plugins>-->
+<!--          <plugin>-->
+<!--            <artifactId>maven-failsafe-plugin</artifactId>-->
+<!--            <version>${surefire-plugin.version}</version>-->
+<!--            <executions>-->
+<!--              <execution>-->
+<!--                <goals>-->
+<!--                  <goal>integration-test</goal>-->
+<!--                  <goal>verify</goal>-->
+<!--                </goals>-->
+<!--                <configuration>-->
+<!--                  <systemPropertyVariables>-->
+<!--                    <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>-->
+<!--                    <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>-->
+<!--                    <maven.home>${maven.home}</maven.home>-->
+<!--                  </systemPropertyVariables>-->
+<!--                </configuration>-->
+<!--              </execution>-->
+<!--            </executions>-->
+<!--          </plugin>-->
+<!--        </plugins>-->
+<!--      </build>-->
       <properties>
         <quarkus.package.type>native</quarkus.package.type>
       </properties>
