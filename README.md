@@ -61,5 +61,4 @@ Use SmallRye Reactive Messaging
 
 test2
 
-test3
 
