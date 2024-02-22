@@ -109,15 +109,15 @@
           </execution>
         </executions>
       </plugin>
-<!--      <plugin>-->
-<!--        <artifactId>maven-compiler-plugin</artifactId>-->
-<!--        <version>${compiler-plugin.version}</version>-->
-<!--        <configuration>-->
-<!--          <compilerArgs>-->
-<!--            <arg>-parameters</arg>-->
-<!--          </compilerArgs>-->
-<!--        </configuration>-->
-<!--      </plugin>-->
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${compiler-plugin.version}</version>
+        <configuration>
+          <compilerArgs>
+            <arg>-parameters</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
 <!--      <plugin>-->
 <!--        <artifactId>maven-surefire-plugin</artifactId>-->
 <!--        <version>${surefire-plugin.version}</version>-->
