@@ -59,5 +59,5 @@ Use SmallRye Reactive Messaging
 
 [Related Apache Kafka guide section...](https://quarkus.io/guides/kafka-reactive-getting-started)
 
-test
+test2
 
