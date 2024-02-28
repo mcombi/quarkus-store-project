@@ -6,9 +6,13 @@ import io.micrometer.core.instrument.MeterRegistry;
 import io.quarkus.logging.Log;
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
 import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.info.Contact;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
 import org.eclipse.microprofile.openapi.annotations.info.License;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 /*import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
@@ -65,18 +69,17 @@ public class OrderResource {
 
     }
 
- //   @DELETE
-  /*  @Operation(summary = "Save an order")
+  @DELETE
+    @Operation(summary = "Save an order")
     @APIResponse(
             responseCode = "200",
             description = "Gets all fights, or empty list if none",
             content = @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = Order.class, type = SchemaType.DEFAULT))
-    )*/
-/*
+    )
+
     @Transactional
     public void deleteOrders(){
         OrderEntity.deleteAll();
     }
-*/
 
 }
