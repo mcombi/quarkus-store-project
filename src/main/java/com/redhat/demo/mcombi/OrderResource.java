@@ -16,13 +16,13 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.Operation;*/
 
-import javax.transaction.Transactional;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import jakarta.transaction.Transactional;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
 
 
 @Path("/order")

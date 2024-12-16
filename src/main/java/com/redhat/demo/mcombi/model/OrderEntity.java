@@ -2,8 +2,8 @@ package com.redhat.demo.mcombi.model;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import java.util.List;
 
 @Entity

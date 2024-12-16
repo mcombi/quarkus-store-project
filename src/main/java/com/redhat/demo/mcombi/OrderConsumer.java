@@ -5,8 +5,8 @@ import io.smallrye.reactive.messaging.kafka.Record;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.jboss.logging.Logger;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.transaction.Transactional;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.transaction.Transactional;
 import java.util.UUID;
 
 @ApplicationScoped
